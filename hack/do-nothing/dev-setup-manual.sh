@@ -38,7 +38,7 @@ echo "  Checking PS1 Configuration"
 if grep -q '\\w\\' ~/.bashrc;
 then
     echo "  Update PS1 so it only shows the current directory, not the full path to the directory"
-    echo "  From within the ~/.bashrc file, change all instances of \\w\\ to \\W\\"
+    echo "      From within the ~/.bashrc file, change all instances of \\w\\ to \\W\\"
     read -n 1 -s -r -p "  Press any key to continue"
 else
     echo "  [X] PS1 Configured"
