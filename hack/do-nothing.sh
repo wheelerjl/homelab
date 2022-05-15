@@ -26,10 +26,10 @@ fi
 echo "  Do-Nothing Script Started"
 echo ""
 echo "  Running apt update and apt upgrade"
-sudo apt -qq install ca-certificates
-sudo apt -qq install software-properties-common apt-transport-https
-sudo add-apt-repository universe
 sudo apt -qq update
+sudo apt-get update
+sudo apt -qq install ca-certificates software-properties-common apt-transport-https
+sudo add-apt-repository universe
 sudo apt upgrade
 echo ""
 echo ""
@@ -178,10 +178,8 @@ then
     echo "  Add the following lines to the end of ~/.bashrc"
     echo "      # Golang Environment Variables"
     echo "      export PATH=\$PATH:/usr/local/go/bin"
-    echo ""
-    echo "      \$OS_USERNAME can be found with the command `whoami`"
-    echo "      export GOBIN=/home/\$OS_USERNAME/workspace/go/bin"
-    echo "      export GOPATH=/home/\$OS_USERNAME/workspace/go"
+    echo "      export GOBIN=/home/$USER/workspace/go/bin"
+    echo "      export GOPATH=/home/$USER/workspace/go"
     read -n 1 -s -r -p "  Press any key to continue"
     echo "  Add go helper aliases to ~/.bash_aliases"
     echo "      # Ensures no caching set when running tests"
@@ -203,8 +201,6 @@ then
     echo "      sudo apt-get install -y kubectl"
     read -n 1 -s -r -p "  Press any key to continue"
     echo "  Update kubectl config settings"
-    echo "  Open .bashrc with vscode"
-    echo "      code ~/.bashrc"
     echo "  Add the following lines to the end of ~/.bashrc"
     echo "      # Use vscode when editing resources with kubectl"
     echo "      export KUBE_EDITOR='code --wait'"
@@ -224,6 +220,58 @@ then
     read -n 1 -s -r -p "  Press any key to continue"
 else
     echo "  [X] Talos Installed"
+fi
+echo ""
+
+echo "  Checking Docker installation"
+if ! command -v docker &> /dev/null
+then
+    echo "  Documentation: https://docs.docker.com/engine/install/debian/#install-docker-engine"
+    echo "  Install Docker with the following commands"
+    echo "      sudo apt remove docker docker-engine docker.io containerd runc"
+    echo "      sudo apt update"
+    echo "      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
+    echo "      sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable\""
+    echo "      sudo apt update"
+    echo "      sudo apt install docker-ce docker-ce-cli containerd.io"
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Enable docker as non-root user"
+    echo "      sudo groupadd docker"
+    echo "      sudo usermod -aG docker $USER"
+    echo "      Note: To run docker as non-root, you must restart machine"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Docker Installed"
+fi
+echo ""
+
+echo "  Checking Kind installation"
+if ! command -v kind &> /dev/null
+then
+    echo "  Documentation: https://kind.sigs.k8s.io/docs/user/quick-start/#installing-from-release-binaries"
+    echo "  Install Kind with the following commands"
+    echo "      curl -Lo /usr/local/bin/kind https://kind.sigs.k8s.io/dl/v0.13.0/kind-linux-amd64"
+    echo "      chmod +x /usr/local/bin/kind"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Kind Installed"
+fi
+echo ""
+
+echo "  Checking Helm installation"
+if ! command -v helm &> /dev/null
+then
+    echo "  Documentation: https://helm.sh/docs/intro/install/#from-script"
+    echo "  Install Helm with the following commands"
+    echo "      curl -Lo ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz https://get.helm.sh/helm-v3.8.2-linux-amd64.tar.gz"
+    echo "      tar -zxvf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz --directory ~/Downloads"
+    echo "      sudo mv ~/Downloads/linux-amd64/helm /usr/local/bin/helm"
+    echo "      sudo chmod +x /usr/local/bin/helm"
+    echo "      rm -rf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz"
+    echo "      rm -rf ~/Downloads/linux-amd64"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Helm Installed"
 fi
 echo ""
 
