@@ -2,6 +2,8 @@
 set -euo pipefail
 # Do nothing script inspired by a blog from Dan Slimmon
 # https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation/
+# This prints out all the steps necessary to setup my local environment in the way I prefer with
+# the intention of automating each step in the future.
 
 echoerr() { echo "$@" 1>&2; }
 fatal() { echoerr "$@"; exit 1; }
