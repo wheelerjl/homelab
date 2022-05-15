@@ -120,7 +120,7 @@ then
     echo "  Install git with the following commands"
     echo "      apt-get install git"
     echo "      git config --global url.ssh://git@github.com/.insteadOf https://github.com/"
-    echo "      git config --global user.name \"\$GITHUB_USERNAME\" - Substitue \$GITHUB_USERNAME with actual email"
+    echo "      git config --global user.name \"\$GITHUB_USERNAME\" - Substitue \$GITHUB_USERNAME with actual username"
     echo "      git config --global user.email \"\$GITHUB_EMAIL\" - Substitue \$GITHUB_EMAIL with actual email"
     read -n 1 -s -r -p "  Press any key to continue"
     echo "  Add github SSH Key"
