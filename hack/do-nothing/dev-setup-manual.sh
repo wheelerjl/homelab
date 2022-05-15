@@ -34,6 +34,17 @@ sudo apt upgrade
 echo ""
 echo ""
 
+echo "  Checking PS1 Configuration"
+if grep -q '\\w\\' ~/.bashrc;
+then
+    echo "  Update PS1 so it only shows the current directory, not the full path to the directory"
+    echo "  From within the ~/.bashrc file, change all instances of \\w\\ to \\W\\"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] PS1 Configured"
+fi
+echo ""
+
 echo "  Checking FiraCode Installation"
 if ! command -v $(dpkg -s fonts-firacode) &> /dev/null
 then
@@ -74,6 +85,11 @@ then
     echo "             \"security.workspace.trust.untrustedFiles\": \"open\","
     echo "             \"diffEditor.ignoreTrimWhitespace\": false,"
     echo "          }"
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Update EDITOR environment variables to use vscode instead of vim (I'm a monster, I know)"
+    echo "  Add exports to ~/.bashrc"
+    echo "      export EDITOR='code --wait'"
+    echo "      export KUBE_EDITOR='code --wait'" 
     read -n 1 -s -r -p "  Press any key to continue"
 else
     echo "  [X] VSCode Installed"
