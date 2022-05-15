@@ -120,7 +120,7 @@ then
     echo "  Install git with the following commands"
     echo "      apt-get install git"
     echo "      git config --global url.ssh://git@github.com/.insteadOf https://github.com/"
-    echo "      git config --global user.name \"\$GITHUB_USERNAME\" - Substitue \$GITHUB_USERNAME with actual email"
+    echo "      git config --global user.name \"\$GITHUB_USERNAME\" - Substitue \$GITHUB_USERNAME with actual username"
     echo "      git config --global user.email \"\$GITHUB_EMAIL\" - Substitue \$GITHUB_EMAIL with actual email"
     read -n 1 -s -r -p "  Press any key to continue"
     echo "  Add github SSH Key"
@@ -272,6 +272,19 @@ then
     read -n 1 -s -r -p "  Press any key to continue"
 else
     echo "  [X] Helm Installed"
+fi
+echo ""
+
+echo "  Checking SOPS installation"
+if ! command -v sops &> /dev/null
+then
+    echo "  Documentation: https://github.com/mozilla/sops#11stable-release"
+    echo "  Install SOPS with the following commands"
+    echo "      sudo curl -Lo /usr/local/bin/sops https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64"
+    echo "      sudo chmod +x /usr/local/bin/sops"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] SOPS Installed"
 fi
 echo ""
 
