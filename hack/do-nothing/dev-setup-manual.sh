@@ -306,5 +306,44 @@ else
 fi
 echo ""
 
+echo "  Checking Flux installation"
+if ! command -v flux &> /dev/null
+then
+    echo "  Documentation: https://fluxcd.io/docs/installation/#install-the-flux-cli"
+    echo "  Install Flux with the following commands"
+    echo "      curl -Lo ~/Downloads/flux_0.30.2_linux_amd64.tar.gz https://github.com/fluxcd/flux2/releases/download/v0.30.2/flux_0.30.2_linux_amd64.tar.gz"
+    echo "      tar -zxvf ~/Downloads/flux_0.30.2_linux_amd64.tar.gz --directory ~/Downloads"
+    echo "      rm -rf ~/Downloads/flux_0.30.2_linux_amd64.tar.gz"
+    echo "      sudo mv ~/Downloads/flux /usr/local/bin/flux"
+    echo "      sudo chmod +x /usr/local/bin/flux"
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Documentation: https://fluxcd.io/docs/cmd/flux_completion_bash/"
+    echo "  Setup bash completion by adding the following line to your ~/.bashrc"
+    echo "      command -v flux >/dev/null && . <(flux completion bash)"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Flux Installed"
+fi
+echo ""
+
+echo "  Checking Age installation"
+if ! command -v age &> /dev/null
+then
+    echo "  Documentation: https://github.com/FiloSottile/age#installation"
+    echo "  Install Age with the following commands"
+    echo "      curl -Lo ~/Downloads/age-v1.0.0-linux-amd64.tar.gz https://github.com/FiloSottile/age/releases/download/v1.0.0/age-v1.0.0-linux-amd64.tar.gz"
+    echo "      tar -zxvf ~/Downloads/age-v1.0.0-linux-amd64.tar.gz --directory ~/Downloads"
+    echo "      sudo mv ~/Downloads/age/age /usr/local/bin/age"
+    echo "      sudo mv ~/Downloads/age/age-keygen /usr/local/bin/age-keygen"
+    echo "      sudo chmod +x /usr/local/bin/age"
+    echo "      sudo chmod +x /usr/local/bin/age-keygen"
+    echo "      rm -rf ~/Downloads/age"
+    echo "      rm -rf ~/Downloads/age-v1.0.0-linux-amd64.tar.gz"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Age Installed"
+fi
+echo ""
+
 echo "  Do-Nothing Script Finished"
 echo ""
