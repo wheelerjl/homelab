@@ -58,76 +58,15 @@ else
 fi
 echo ""
 
-echo "  Checking VSCode Installation"
-if ! command -v code &> /dev/null
+echo "  Checking NotepadQQ Installation"
+if ! command -v notepadqq &> /dev/null
 then
-    echo "  Install VSCode with the following commands"
-    echo "      wget -O ~/Downloads/code.deb http://go.microsoft.com/fwlink/?LinkID=760868"
-    echo "      sudo apt install ~/Downloads/code.deb"
-    echo "      rm -rf ~/Downloads/code.deb"
-    read -n 1 -s -r -p "  Press any key to continue"
-    echo "  Add VSCode Extensions"
-    echo "      Documentation: https://code.visualstudio.com/docs/editor/extension-marketplace#_command-line-extension-management"
-    echo "      code --install-extension enkia.tokyo-night"
-    echo "      code --install-extension golang.go"
-    echo "      code --install-extension PKief.material-icon-theme"
-    echo "      code --install-extension eamodio.gitlens"
-    read -n 1 -s -r -p "  Press any key to continue"
-    echo "  Update VSCode User Settings"
-    echo "      Documentation: https://code.visualstudio.com/docs/getstarted/settings#_changing-settingsjson"
-    echo "      Update ~/.config/Code/User/settings.json"
-    echo "          {"
-    echo "             \"workbench.colorTheme\": \"Tokyo Night\","
-    echo "             \"workbench.iconTheme\": \"material-icon-theme\","
-    echo "             \"workbench.editor.untitled.hint\": \"hidden\","
-    echo "             \"editor.fontFamily\": \"Fira Code\","
-    echo "             \"editor.fontLigatures\": true,"
-    echo "             \"editor.links\": false,"
-    echo "             \"redhat.telemetry.enabled\": false,"
-    echo "             \"security.workspace.trust.untrustedFiles\": \"open\","
-    echo "             \"diffEditor.ignoreTrimWhitespace\": false,"
-    echo "          }"
-    read -n 1 -s -r -p "  Press any key to continue"
-    echo "  Update EDITOR environment variables to use vscode instead of vim (I'm a monster, I know)"
-    echo "  Add exports to ~/.bashrc"
-    echo "      export EDITOR='code --wait'"
-    echo "      export KUBE_EDITOR='code --wait'" 
+    echo "  Documentation: https://notepadqq.com/wp/download/"
+    echo "  Install git with the following commands"
+    echo "      sudo apt install notepadqq"
     read -n 1 -s -r -p "  Press any key to continue"
 else
-    echo "  [X] VSCode Installed"
-fi
-echo ""
-
-echo "  Checking Terminator Installation"
-if ! command -v terminator &> /dev/null
-then
-    echo "  Install Terminator with the following commands"
-    echo "      Documentation: https://github.com/gnome-terminator/terminator/blob/master/INSTALL.md"
-    echo "      sudo add-apt-repository ppa:mattrose/terminator"
-    echo "      sudo apt-get update"
-    echo "      sudo apt install terminator"
-    read -n 1 -s -r -p "  Press any key to continue"
-    echo "  Update ~/.config/terminator/config"
-    echo "      [global_config]"
-    echo "        suppress_multiple_term_dialog = True"
-    echo "      [keybindings]"
-    echo "      [profiles]"
-    echo "        [[default]]"
-    echo "          cursor_color = \"#aaaaaa\""
-    echo "          scrollback_infinite = True"
-    echo "          login_shell = True"
-    echo "      [layouts]"
-    echo "        [[default]]"
-    echo "          [[[window0]]]"
-    echo "            type = Window"
-    echo "            parent = \"\""
-    echo "          [[[child1]]]"
-    echo "            type = Terminal"
-    echo "            parent = window0"
-    echo "      [plugins]"
-    read -n 1 -s -r -p "  Press any key to continue"
-else
-    echo "  [X] Terminator Installed"
+    echo "  [X] NotepadQQ Installed"
 fi
 echo ""
 
@@ -165,6 +104,78 @@ then
     read -n 1 -s -r -p "  Press any key to continue"
 else
     echo "  [X] Git Installed"
+fi
+echo ""
+
+echo "  Checking VSCode Installation"
+if ! command -v code &> /dev/null
+then
+    echo "  Install VSCode with the following commands"
+    echo "      wget -O ~/Downloads/code.deb http://go.microsoft.com/fwlink/?LinkID=760868"
+    echo "      sudo apt install ~/Downloads/code.deb"
+    echo "      rm -rf ~/Downloads/code.deb"
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Add VSCode Extensions"
+    echo "      Documentation: https://code.visualstudio.com/docs/editor/extension-marketplace#_command-line-extension-management"
+    echo "      code --install-extension enkia.tokyo-night"
+    echo "      code --install-extension golang.go"
+    echo "      code --install-extension PKief.material-icon-theme"
+    echo "      code --install-extension eamodio.gitlens"
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Update VSCode User Settings"
+    echo "      Documentation: https://code.visualstudio.com/docs/getstarted/settings#_changing-settingsjson"
+    echo "      Update ~/.config/Code/User/settings.json"
+    echo "          {"
+    echo "             \"workbench.colorTheme\": \"Tokyo Night\","
+    echo "             \"workbench.iconTheme\": \"material-icon-theme\","
+    echo "             \"workbench.editor.untitled.hint\": \"hidden\","
+    echo "             \"editor.fontFamily\": \"Fira Code\","
+    echo "             \"editor.fontLigatures\": true,"
+    echo "             \"editor.links\": false,"
+    echo "             \"redhat.telemetry.enabled\": false,"
+    echo "             \"security.workspace.trust.untrustedFiles\": \"open\","
+    echo "             \"diffEditor.ignoreTrimWhitespace\": false,"
+    echo "          }"
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Update EDITOR environment variables to use vscode instead of vim (I'm a monster, I know)"
+    echo "  Add exports to ~/.bashrc"
+    echo "      export EDITOR='code --wait'"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] VSCode Installed"
+fi
+echo ""
+
+echo "  Checking Terminator Installation"
+if ! command -v terminator &> /dev/null
+then
+    echo "  Install Terminator with the following commands"
+    echo "      Documentation: https://github.com/gnome-terminator/terminator/blob/master/INSTALL.md"
+    echo "      sudo add-apt-repository ppa:mattrose/terminator"
+    echo "      sudo apt-get update"
+    echo "      sudo apt install terminator"
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Update ~/.config/terminator/config"
+    echo "      [global_config]"
+    echo "        suppress_multiple_term_dialog = True"
+    echo "      [keybindings]"
+    echo "      [profiles]"
+    echo "        [[default]]"
+    echo "          cursor_color = \"#aaaaaa\""
+    echo "          scrollback_infinite = True"
+    echo "          login_shell = True"
+    echo "      [layouts]"
+    echo "        [[default]]"
+    echo "          [[[window0]]]"
+    echo "            type = Window"
+    echo "            parent = \"\""
+    echo "          [[[child1]]]"
+    echo "            type = Terminal"
+    echo "            parent = window0"
+    echo "      [plugins]"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Terminator Installed"
 fi
 echo ""
 
@@ -228,6 +239,38 @@ else
 fi
 echo ""
 
+echo "  Checking Terraform Installation"
+if ! command -v terraform &> /dev/null
+then
+    echo "  Install Terraform with the following commands"
+    echo "      Documentation: https://learn.hashicorp.com/tutorials/terraform/install-cli"
+    echo "      curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -"
+                # Note focal is hardcoded here instead of the command in the instructions since my linux version is mint and not base ubuntu 
+    echo "      sudo apt-add-repository \"deb [arch=amd64] https://apt.releases.hashicorp.com focal main"\"
+    echo "      sudo apt-get update && sudo apt-get install terraform"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Terraform Installed"
+fi
+echo ""
+
+echo "  Checking Helm installation"
+if ! command -v helm &> /dev/null
+then
+    echo "  Documentation: https://helm.sh/docs/intro/install/#from-script"
+    echo "  Install Helm with the following commands"
+    echo "      curl -Lo ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz https://get.helm.sh/helm-v3.8.2-linux-amd64.tar.gz"
+    echo "      tar -zxvf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz --directory ~/Downloads"
+    echo "      sudo mv ~/Downloads/linux-amd64/helm /usr/local/bin/helm"
+    echo "      sudo chmod +x /usr/local/bin/helm"
+    echo "      rm -rf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz"
+    echo "      rm -rf ~/Downloads/linux-amd64"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Helm Installed"
+fi
+echo ""
+
 echo "  Checking Talos installation"
 if ! command -v talosctl &> /dev/null
 then
@@ -273,23 +316,6 @@ then
     read -n 1 -s -r -p "  Press any key to continue"
 else
     echo "  [X] Kind Installed"
-fi
-echo ""
-
-echo "  Checking Helm installation"
-if ! command -v helm &> /dev/null
-then
-    echo "  Documentation: https://helm.sh/docs/intro/install/#from-script"
-    echo "  Install Helm with the following commands"
-    echo "      curl -Lo ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz https://get.helm.sh/helm-v3.8.2-linux-amd64.tar.gz"
-    echo "      tar -zxvf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz --directory ~/Downloads"
-    echo "      sudo mv ~/Downloads/linux-amd64/helm /usr/local/bin/helm"
-    echo "      sudo chmod +x /usr/local/bin/helm"
-    echo "      rm -rf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz"
-    echo "      rm -rf ~/Downloads/linux-amd64"
-    read -n 1 -s -r -p "  Press any key to continue"
-else
-    echo "  [X] Helm Installed"
 fi
 echo ""
 
