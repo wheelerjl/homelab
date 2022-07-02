@@ -58,6 +58,55 @@ else
 fi
 echo ""
 
+echo "  Checking NotepadQQ Installation"
+if ! command -v notepadqq &> /dev/null
+then
+    echo "  Documentation: https://notepadqq.com/wp/download/"
+    echo "  Install git with the following commands"
+    echo "      sudo apt install notepadqq"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] NotepadQQ Installed"
+fi
+echo ""
+
+echo "  Checking Git Installation"
+if ! command -v git &> /dev/null
+then
+    echo "  Documentation: https://git-scm.com/download/linux"
+    echo "  Install git with the following commands"
+    echo "      apt-get install git"
+    echo "      git config --global url.ssh://git@github.com/.insteadOf https://github.com/"
+    echo "      git config --global user.name \"\$GITHUB_USERNAME\" - Substitue \$GITHUB_USERNAME with actual username"
+    echo "      git config --global user.email \"\$GITHUB_EMAIL\" - Substitue \$GITHUB_EMAIL with actual email"
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Add github SSH Key"
+    echo "      Documentation: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
+    echo "      Create Github SSH Key"
+    echo "          ssh-keygen -t ed25519 -C \"\$GITHUB_EMAIL\" - Substitue \$GITHUB_EMAIL with actual email"
+    echo "          eval \"\$(ssh-agent -s)\""
+    echo "          ssh-add ~/.ssh/id_ed25519"
+    echo "      Documentation: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
+    echo "      Copy SSH Key to Github"
+    echo "          cat ~/.ssh/id_ed25519.pub"
+    echo "          Follow documentation to copy the key to Github"
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Add git Helper aliases to ~/.bash_aliases"
+    echo "      alias main='git checkout main && git pull'"
+    echo "      alias push='git push || eval \$(git push 2>&1 | grep \"set-upstream\")'"    
+    read -n 1 -s -r -p "  Press any key to continue"
+    echo "  Add git helper bash function to ~/.bashrc"
+    echo "      # Removes any git branches that exist locally but have been deleted from the remote"
+    echo "      function prune() {"
+    echo "          git remote prune origin"
+    echo "          git branch --v | grep \"\[gone\]\" | awk '{print \$1}' | xargs git branch -D"
+    echo "      }"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Git Installed"
+fi
+echo ""
+
 echo "  Checking VSCode Installation"
 if ! command -v code &> /dev/null
 then
@@ -131,43 +180,6 @@ else
 fi
 echo ""
 
-echo "  Checking Git Installation"
-if ! command -v git &> /dev/null
-then
-    echo "  Documentation: https://git-scm.com/download/linux"
-    echo "  Install git with the following commands"
-    echo "      apt-get install git"
-    echo "      git config --global url.ssh://git@github.com/.insteadOf https://github.com/"
-    echo "      git config --global user.name \"\$GITHUB_USERNAME\" - Substitue \$GITHUB_USERNAME with actual username"
-    echo "      git config --global user.email \"\$GITHUB_EMAIL\" - Substitue \$GITHUB_EMAIL with actual email"
-    read -n 1 -s -r -p "  Press any key to continue"
-    echo "  Add github SSH Key"
-    echo "      Documentation: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
-    echo "      Create Github SSH Key"
-    echo "          ssh-keygen -t ed25519 -C \"\$GITHUB_EMAIL\" - Substitue \$GITHUB_EMAIL with actual email"
-    echo "          eval \"\$(ssh-agent -s)\""
-    echo "          ssh-add ~/.ssh/id_ed25519"
-    echo "      Documentation: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
-    echo "      Copy SSH Key to Github"
-    echo "          cat ~/.ssh/id_ed25519.pub"
-    echo "          Follow documentation to copy the key to Github"
-    read -n 1 -s -r -p "  Press any key to continue"
-    echo "  Add git Helper aliases to ~/.bash_aliases"
-    echo "      alias main='git checkout main && git pull'"
-    echo "      alias push='git push || eval \$(git push 2>&1 | grep \"set-upstream\")'"    
-    read -n 1 -s -r -p "  Press any key to continue"
-    echo "  Add git helper bash function to ~/.bashrc"
-    echo "      # Removes any git branches that exist locally but have been deleted from the remote"
-    echo "      function prune() {"
-    echo "          git remote prune origin"
-    echo "          git branch --v | grep \"\[gone\]\" | awk '{print \$1}' | xargs git branch -D"
-    echo "      }"
-    read -n 1 -s -r -p "  Press any key to continue"
-else
-    echo "  [X] Git Installed"
-fi
-echo ""
-
 echo "  Checking Github CLI Installation"
 if ! command -v gh &> /dev/null
 then
@@ -228,6 +240,38 @@ else
 fi
 echo ""
 
+echo "  Checking Terraform Installation"
+if ! command -v terraform &> /dev/null
+then
+    echo "  Install Terraform with the following commands"
+    echo "      Documentation: https://learn.hashicorp.com/tutorials/terraform/install-cli"
+    echo "      curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -"
+                # Note focal is hardcoded here instead of the command in the instructions since my linux version is mint and not base ubuntu 
+    echo "      sudo apt-add-repository \"deb [arch=amd64] https://apt.releases.hashicorp.com focal main"\"
+    echo "      sudo apt-get update && sudo apt-get install terraform"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Terraform Installed"
+fi
+echo ""
+
+echo "  Checking Helm installation"
+if ! command -v helm &> /dev/null
+then
+    echo "  Documentation: https://helm.sh/docs/intro/install/#from-script"
+    echo "  Install Helm with the following commands"
+    echo "      curl -Lo ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz https://get.helm.sh/helm-v3.8.2-linux-amd64.tar.gz"
+    echo "      tar -zxvf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz --directory ~/Downloads"
+    echo "      sudo mv ~/Downloads/linux-amd64/helm /usr/local/bin/helm"
+    echo "      sudo chmod +x /usr/local/bin/helm"
+    echo "      rm -rf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz"
+    echo "      rm -rf ~/Downloads/linux-amd64"
+    read -n 1 -s -r -p "  Press any key to continue"
+else
+    echo "  [X] Helm Installed"
+fi
+echo ""
+
 echo "  Checking Talos installation"
 if ! command -v talosctl &> /dev/null
 then
@@ -273,23 +317,6 @@ then
     read -n 1 -s -r -p "  Press any key to continue"
 else
     echo "  [X] Kind Installed"
-fi
-echo ""
-
-echo "  Checking Helm installation"
-if ! command -v helm &> /dev/null
-then
-    echo "  Documentation: https://helm.sh/docs/intro/install/#from-script"
-    echo "  Install Helm with the following commands"
-    echo "      curl -Lo ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz https://get.helm.sh/helm-v3.8.2-linux-amd64.tar.gz"
-    echo "      tar -zxvf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz --directory ~/Downloads"
-    echo "      sudo mv ~/Downloads/linux-amd64/helm /usr/local/bin/helm"
-    echo "      sudo chmod +x /usr/local/bin/helm"
-    echo "      rm -rf ~/Downloads/helm-v3.8.2-linux-amd64.tar.gz"
-    echo "      rm -rf ~/Downloads/linux-amd64"
-    read -n 1 -s -r -p "  Press any key to continue"
-else
-    echo "  [X] Helm Installed"
 fi
 echo ""
 
