@@ -140,7 +140,6 @@ then
     echo "  Update EDITOR environment variables to use vscode instead of vim (I'm a monster, I know)"
     echo "  Add exports to ~/.bashrc"
     echo "      export EDITOR='code --wait'"
-    echo "      export KUBE_EDITOR='code --wait'" 
     read -n 1 -s -r -p "  Press any key to continue"
 else
     echo "  [X] VSCode Installed"
