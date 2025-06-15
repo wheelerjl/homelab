@@ -1,15 +1,7 @@
 services:
   # Using external PostgreSQL from Kubernetes cluster
   # db_recipes service is commented out as we're using the PostgreSQL in the Kind cluster
-  # If you want to switch back to a local database, uncomment this section
-  # db_recipes:
-  #   restart: always
-  #   image: postgres:16-alpine
-  #   volumes:
-  #     - ./postgresql:/var/lib/postgresql/data
-  #   env_file:
-  #     - ./.env
-
+  
   web_recipes:
     restart: always
     image: vabene1111/recipes
@@ -20,9 +12,7 @@ services:
       # Do not make this a bind mount, see https://docs.tandoor.dev/install/docker/#volumes-vs-bind-mounts
       - nginx_config:/opt/recipes/nginx/conf.d
       - ./mediafiles:/opt/recipes/mediafiles
-    # Using external PostgreSQL, so no dependencies needed
-    # depends_on:
-    #   - db_recipes
+    # PostgreSQL is running externally
 
   nginx_recipes:
     image: nginx:mainline-alpine
