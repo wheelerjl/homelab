@@ -1,0 +1,16 @@
+creation_rules:
+  - path_regex: clusters/local/.*\.yaml
+    encrypted_regex: ^(data|stringData)$
+    age: age1dwysaanunv5jj390kr46hp4ntrver3ampqanasm9qxhka9fevudq5qg6ms
+  
+  - path_regex: apps/local/.*\.yaml
+    encrypted_regex: ^(data|stringData)$
+    age: age1dwysaanunv5jj390kr46hp4ntrver3ampqanasm9qxhka9fevudq5qg6ms
+
+  - path_regex: clusters/oruse/.*\.yaml
+    encrypted_regex: ^(data|stringData)$
+    age: age17rl8aj6z7me9rj8vpjesujxpkwrducrhtdv7fvamm592z8280pusfrruup
+  
+  - path_regex: apps/oruse/.*\.yaml
+    encrypted_regex: ^(data|stringData)$
+    age: age17rl8aj6z7me9rj8vpjesujxpkwrducrhtdv7fvamm592z8280pusfrruup
