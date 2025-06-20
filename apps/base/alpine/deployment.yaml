@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpine
+  namespace: tools
+spec:
+  selector:
+    matchLabels:
+      app: alpine
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: alpine
+    spec:
+      containers:
+      - name: alpine
+        image: alpine:3.22.0
+        command: ["sleep", "infinity"]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
