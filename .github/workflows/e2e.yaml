@@ -33,20 +33,12 @@ jobs:
           --password=${{ secrets.GITHUB_TOKEN }} \
           --ignore-paths="clusters/**/flux-system/"
 
-      # Create the SOPS Age key secret for Flux after the namespace is created
+      # Create the SOPS Age key secret for Flux using a more reliable approach
       - name: Create SOPS Age key secret for Flux
         run: |
-          cat << EOF | kubectl apply -f -
-          apiVersion: v1
-          kind: Secret
-          metadata:
-            name: sops-age
-            namespace: flux-system
-          type: Opaque
-          stringData:
-            age.agekey: |
-              ${{ secrets.SOPS_AGE_KEY }}
-          EOF
+          echo "${{ secrets.SOPS_AGE_KEY }}" > age.agekey
+          kubectl create secret generic sops-age -n flux-system --from-file=age.agekey
+          rm age.agekey
 
       - name: Create kustomization
         run: |
