@@ -24,9 +24,18 @@ jobs:
       - name: Install Flux in Kubernetes Kind
         run: flux install
 
+      - name: Setup cluster reconciliation
+        run: |
+          flux create source git flux-system \
+          --url=${{ github.event.repository.html_url }} \
+          --branch=${GITHUB_REF#refs/heads/} \
+          --username=${GITHUB_ACTOR} \
+          --password=${{ secrets.GITHUB_TOKEN }} \
+          --ignore-paths="clusters/**/flux-system/"
+
+      # Create the SOPS Age key secret for Flux after the namespace is created
       - name: Create SOPS Age key secret for Flux
         run: |
-          kubectl create namespace flux-system --dry-run=client -o yaml | kubectl apply -f -
           cat << EOF | kubectl apply -f -
           apiVersion: v1
           kind: Secret
@@ -39,14 +48,8 @@ jobs:
               ${{ secrets.SOPS_AGE_KEY }}
           EOF
 
-      - name: Setup cluster reconciliation
+      - name: Create kustomization
         run: |
-          flux create source git flux-system \
-          --url=${{ github.event.repository.html_url }} \
-          --branch=${GITHUB_REF#refs/heads/} \
-          --username=${GITHUB_ACTOR} \
-          --password=${{ secrets.GITHUB_TOKEN }} \
-          --ignore-paths="clusters/**/flux-system/"
           flux create kustomization flux-system \
           --source=flux-system \
           --path=./clusters/local
