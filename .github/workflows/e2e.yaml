@@ -37,7 +37,7 @@ jobs:
       - name: Create SOPS Age key secret for Flux
         run: |
           echo "${{ secrets.SOPS_AGE_KEY }}" > age.agekey
-          kubectl create secret generic sops-age -n flux-system --from-file=age.agekey
+          kubectl create secret generic sops-age -n flux-system --from-file=age.agekey=age.agekey
           rm age.agekey
 
       - name: Create kustomization
