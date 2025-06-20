@@ -13,12 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Age key
-        run: |
-          mkdir -p ~/.config/sops/age
-          echo "${{ secrets.SOPS_AGE_KEY }}" > ~/.config/sops/age/keys.txt
-          chmod 600 ~/.config/sops/age/keys.txt
-
       - name: Setup Flux
         uses: fluxcd/flux2/action@main
 
@@ -29,6 +23,21 @@ jobs:
 
       - name: Install Flux in Kubernetes Kind
         run: flux install
+
+      - name: Create SOPS Age key secret for Flux
+        run: |
+          kubectl create namespace flux-system --dry-run=client -o yaml | kubectl apply -f -
+          cat << EOF | kubectl apply -f -
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: sops-age
+            namespace: flux-system
+          type: Opaque
+          stringData:
+            age.agekey: |
+              ${{ secrets.SOPS_AGE_KEY }}
+          EOF
 
       - name: Setup cluster reconciliation
         run: |
