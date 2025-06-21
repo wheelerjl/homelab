@@ -1,0 +1,92 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: democratic-csi
+  namespace: kube-system
+spec:
+  interval: 12h
+  url: https://democratic-csi.github.io/charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: democratic-csi-nfs
+  namespace: kube-system
+spec:
+  dependsOn:
+    - name: democratic-csi-nfs-secret
+      namespace: kube-system
+  interval: 30m
+  chart:
+    spec:
+      chart: democratic-csi
+      version: "0.13.x"
+      sourceRef:
+        kind: HelmRepository
+        name: democratic-csi
+        namespace: kube-system
+  values:
+    controller:
+      enabled: true
+    node:
+      enabled: true
+    csiDriver:
+      name: "org.democratic-csi.nfs"
+      fsGroupPolicy: File
+    storageClasses:
+    - name: freenas-nfs-csi
+      defaultClass: false
+      reclaimPolicy: Delete
+      volumeBindingMode: Immediate
+      allowVolumeExpansion: true
+      parameters:
+        fsType: nfs
+      mountOptions:
+      - noatime
+      - nfsvers=3
+    driver:
+      config:
+        driver: freenas-nfs
+        instance_id: truenas-nfs
+        httpConnection:
+          protocol: http
+          host:
+            valueFrom:
+              secretKeyRef:
+                name: democratic-csi-nfs-secret
+                key: TRUENAS_HOST
+          port: 80
+          username:
+            valueFrom:
+              secretKeyRef:
+                name: democratic-csi-nfs-secret
+                key: TRUENAS_USERNAME
+          password:
+            valueFrom:
+              secretKeyRef:
+                name: democratic-csi-nfs-secret
+                key: TRUENAS_PASSWORD
+          allowInsecure: true
+        zfs:
+          datasetParentName:
+            valueFrom:
+              secretKeyRef:
+                name: democratic-csi-nfs-secret
+                key: TRUENAS_ZFS_DATASET
+          detachedSnapshotsDatasetParentName: tank/k8s/a/snaps # required to be set but isn't in use for anything so fake data
+          datasetEnableQuotas: true
+          datasetEnableReservation: false
+          datasetPermissionsMode: "0777"
+          datasetPermissionsUser: 0
+          datasetPermissionsGroup: 0
+        nfs:
+          shareHost:
+            valueFrom:
+              secretKeyRef:
+                name: democratic-csi-nfs-secret
+                key: TRUENAS_HOST
+          shareAlldirs: false
+          shareAllowedHosts: []
+          shareAllowedNetworks: []
+          shareMaprootUser: root
+          shareMaprootGroup: wheel
