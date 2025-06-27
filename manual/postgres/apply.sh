@@ -42,5 +42,5 @@ helm upgrade --install --create-namespace --namespace postgres \
     --version 16.7.13 \
     --wait postgres bitnami/postgresql \
     --values values.yaml \
-    --set "global.postgresql.auth.password=IZi6uL5rNzHwct" \
-    --set "global.postgresql.auth.postgresPassword=M5GWlESwVdY6wD"
+    --set "global.postgresql.auth.password=" \
+    --set "global.postgresql.auth.postgresPassword="
