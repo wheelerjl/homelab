@@ -3,7 +3,8 @@ kind: Kustomization
 resources:
   - ../base/podinfo
   - ../base/alpine
-  - ./database-secret.yaml
+  - ./tandor
+  - database-secret.yaml
 patches:
   - path: podinfo-values.yaml
     target:
