@@ -6,7 +6,7 @@ spec:
   releaseName: cloudflare
   chart:
     spec:
-      chart: cloudflare
+      chart: cloudflare-tunnel
       sourceRef:
         kind: HelmRepository
         name: cloudflare
