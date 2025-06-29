@@ -157,7 +157,7 @@ spec:
             subPath: files
         env:
           - name: DEBUG
-            value: "0"
+            value: "1"
           - name: ALLOWED_HOSTS
             value: '*'
           - name: GUNICORN_MEDIA
