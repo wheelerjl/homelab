@@ -162,6 +162,8 @@ spec:
             value: '*'
           - name: GUNICORN_MEDIA
             value: "0"
+          - name: TZ
+            value: "America/Chicago"
           - name: SECRET_KEY
             valueFrom:
               secretKeyRef:
